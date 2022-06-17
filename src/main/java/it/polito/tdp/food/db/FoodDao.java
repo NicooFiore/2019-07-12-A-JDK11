@@ -116,7 +116,7 @@ public class FoodDao {
 				+ "FROM `portion` p,food f\n"
 				+ "WHERE p.food_code=f.food_code \n"
 				+ "GROUP BY f.food_code\n"
-				+ "HAVING c<=?" ;
+				+ "HAVING c=?" ;
 		try {
 			Connection conn = DBConnect.getConnection() ;
 
@@ -152,9 +152,9 @@ public class FoodDao {
 				+ "FROM food_condiment fc1,food_condiment fc2,condiment cc "
 				+ "WHERE fc1.food_code IN (SELECT distinct f.food_code FROM `portion` p,food f WHERE p.food_code=f.food_code "
 				+ "GROUP BY f.food_code "
-				+ "HAVING COUNT(*)<=?) AND fc2.food_code IN (SELECT distinct f.food_code FROM `portion` p,food f WHERE p.food_code=f.food_code "
+				+ "HAVING COUNT(*)=?) AND fc2.food_code IN (SELECT distinct f.food_code FROM `portion` p,food f WHERE p.food_code=f.food_code "
 				+ "GROUP BY f.food_code "
-				+ "HAVING COUNT(*)<=?) AND fc1.food_code>fc2.food_code AND fc1.condiment_code=fc2.condiment_code AND cc.condiment_code=fc1.condiment_code "
+				+ "HAVING COUNT(*)=?) AND fc1.food_code>fc2.food_code AND fc1.condiment_code=fc2.condiment_code AND cc.condiment_code=fc1.condiment_code "
 				+ "group BY fc1.food_code,fc2.food_code " ;
 		try {
 			Connection conn = DBConnect.getConnection() ;

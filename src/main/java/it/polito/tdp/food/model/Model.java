@@ -1,5 +1,7 @@
 package it.polito.tdp.food.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,5 +37,20 @@ public class Model {
 			Graphs.addEdgeWithVertices(grafo,c.getF1(), c.getF2(), c.getPeso());
 		}
 		System.out.println(grafo.edgeSet().size());
+	}
+	public String calorie(Food f) {
+		List<ViciniCalorie> vicini=new ArrayList<>();
+		for(Food ff:Graphs.neighborListOf(grafo, f)) {
+			DefaultWeightedEdge e=grafo.getEdge(ff, f);
+			double peso=grafo.getEdgeWeight(e);
+			vicini.add(new ViciniCalorie(ff,peso));
+		}
+		Collections.sort(vicini);
+		Collections.reverse(vicini);
+		String res="";
+		for(int i=0;i<5 && i<Graphs.neighborListOf(grafo, f).size();i++) {
+		res=vicini.get(i).getVicino().getDisplay_name()+" : "+vicini.get(i).getCalorie();	
+		}
+		return res;
 	}
 }

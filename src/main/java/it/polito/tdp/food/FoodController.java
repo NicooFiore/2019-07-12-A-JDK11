@@ -68,7 +68,8 @@ public class FoodController {
     @FXML
     void doCalorie(ActionEvent event) {
     	txtResult.clear();
-    	txtResult.appendText("Analisi calorie...");
+    	txtResult.appendText(model.calorie(this.boxFood.getValue()));
+    	
     }
 
     @FXML
